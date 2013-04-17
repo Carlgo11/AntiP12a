@@ -1,0 +1,6 @@
+main: org.carlgo11.anti.p12a.Main
+name: AntiP12a
+version: A0.1
+commands:
+  p12a:
+  verify:
