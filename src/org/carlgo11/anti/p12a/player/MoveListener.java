@@ -1,6 +1,7 @@
 package org.carlgo11.anti.p12a.player;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +20,9 @@ public class MoveListener implements Listener {
     public void onMove(PlayerMoveEvent e){
     	Player player = e.getPlayer();
     	if(!plugin.getConfig().getString(e.getPlayer().getName()).equals("verified")){
-    		e.setCancelled(true);
+    		Location to = e.getFrom();
+    		e.getFrom();
+    		e.setTo(to);
     	} else {
     		
     	}
