@@ -48,7 +48,7 @@ public class JoinListener implements Listener {
 						@Override
 						public void run() {
 							 if(p.getName().equals(e.getPlayer().getName())){
-					               p.sendMessage(prefix + ChatColor.RED + "Welcome to the server Sir! To see that you're not a bot we want you to type this command in the chat: " + ChatColor.AQUA + "/verify " + plugin.getConfig().getInt(e.getPlayer().getName()) + ". " + ChatColor.RED + "Type the number with actual numbers!");
+					               p.sendMessage(prefix + ChatColor.RED + "Welcome to the server Sir! To see that you're not a bot we want you to type this command in the chat: " + ChatColor.AQUA + "/verify " + plugin.getConfig().getInt(e.getPlayer().getName()) + ". " + ChatColor.RED + "\n ");
 					            }
 							
 						}

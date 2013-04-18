@@ -6,9 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.carlgo11.anti.p12a.player.ChatListener;
-import org.carlgo11.anti.p12a.player.JoinListener;
-import org.carlgo11.anti.p12a.player.MoveListener;
+import org.carlgo11.anti.p12a.player.*;
 
 public class Main extends JavaPlugin{
 	
@@ -21,8 +19,10 @@ public class Main extends JavaPlugin{
 		}
 		System.out.println("[" + getDescription().getName() + "] " + "is enabled");
 		getServer().getPluginManager().registerEvents(new JoinListener(this), this);
+		getServer().getPluginManager().registerEvents(new QuitListener(this), this);
 		getServer().getPluginManager().registerEvents(new ChatListener(this), this);
 		getServer().getPluginManager().registerEvents(new MoveListener(this), this);
+		
 	}
 	public void onDisalbe(){
 		

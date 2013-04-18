@@ -23,7 +23,7 @@ public class ChatListener implements Listener {
 	    	Player player = e.getPlayer();
 	    	if(!plugin.getConfig().getString(player.getName()).equals("verified")){
 	    		e.setCancelled(true);
-	    		player.sendMessage(prefix + ChatColor.RED + "To see that you're not a bot we want you to type this command in the chat: " + ChatColor.AQUA + "/verify " + plugin.getConfig().getInt(player.getName()) + ". " + ChatColor.RED + "Type the number with actual numbers!");
+	    		player.sendMessage(prefix + ChatColor.RED + "To see that you're not a bot we want you to type this command in the chat: " + ChatColor.AQUA + "/verify " + plugin.getConfig().getInt(player.getName()) + ". " + ChatColor.RED + "\n ");
 	    	}
 	    }
 
