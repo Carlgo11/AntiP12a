@@ -22,11 +22,15 @@ public class Main extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new QuitListener(this), this);
 		getServer().getPluginManager().registerEvents(new ChatListener(this), this);
 		getServer().getPluginManager().registerEvents(new MoveListener(this), this);
+		getServer().getPluginManager().registerEvents(new CommandListener(this), this);
+		getServer().getPluginManager().registerEvents(new BlockListener(this), this);
 		
 	}
+	
 	public void onDisalbe(){
 		
 	}
+	
 	public boolean onCommand(final CommandSender sender, Command cmd, String commandLabel, String[] args){
 		String prefix = ChatColor.GREEN + "[" + getDescription().getName() + "] ";
 		if(cmd.getName().equalsIgnoreCase("p12a")){
@@ -39,11 +43,10 @@ public class Main extends JavaPlugin{
 				if(args.length == 1){
 					//Verify code
 					if(getConfig().getString(sender.getName()).equalsIgnoreCase(args[0])){
-						sender.sendMessage(prefix + "Okay! Go ahead!");
 						getConfig().set(sender.getName(), "verified");
-						getConfig().set("Carlgo", "hi");
 						saveConfig();
-						
+						sender.sendMessage(prefix + "Okay! Go ahead!");
+						System.out.println("[" + getDescription().getName() + "] " + sender.getName() + " is not a p12a!");
 					} else {
 					sender.sendMessage(prefix + ChatColor.YELLOW + "Think you messed something up! Try again");
 					}
@@ -55,13 +58,7 @@ public class Main extends JavaPlugin{
 		}
 		
 		return true;
-		
-	}
-	static public String playername = null;
-	static public void onCreateString(){
-		randomint.onInt();
-		
 	}
 	
-
+	static public String playername = null;
 }

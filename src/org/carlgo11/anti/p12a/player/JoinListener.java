@@ -21,7 +21,7 @@ public class JoinListener implements Listener {
 	    
 	    @EventHandler
 	    public void onPlayerJoin(final PlayerJoinEvent e){
-	    	Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "Testing");
+	    	
 	    	final String prefix = ChatColor.GREEN + "[" + plugin.getDescription().getName() + "] ";
 	    	if(!plugin.getConfig().contains(e.getPlayer().getName())){
 	    		int rand = randomint.number;
