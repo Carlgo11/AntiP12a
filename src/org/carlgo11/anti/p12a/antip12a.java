@@ -63,6 +63,9 @@ public class antip12a extends JavaPlugin
     public void save(){
         try {
             File file = new File(getDataFolder() + "/names.txt");
+            if(!file.exists()){
+                file.createNewFile();
+            }
             PrintWriter write = new PrintWriter(file, "UTF-8");
 
             for (int i = 0; i < names.size(); i++)
