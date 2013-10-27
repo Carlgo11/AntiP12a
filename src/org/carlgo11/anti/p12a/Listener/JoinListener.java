@@ -10,13 +10,6 @@ import org.carlgo11.anti.p12a.antip12a;
 
 import java.util.ArrayList;
 
-/**
- * Bukkit Plugin
- * Plugin Name: antip12a
- * Author: tryy3
- * Date: 2013-10-26
- * Time: 13:27
- */
 public class JoinListener implements Listener {
     antip12a plugin;
 

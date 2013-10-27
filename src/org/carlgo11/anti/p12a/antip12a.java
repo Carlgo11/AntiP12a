@@ -10,13 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 import java.util.ArrayList;
 
-/**
- * Bukkit Plugin
- * Plugin Name: antip12a
- * Author: tryy3
- * Date: 2013-10-26
- * Time: 12:19
- */
 public class antip12a extends JavaPlugin
 {
     String prefix;
@@ -70,6 +63,9 @@ public class antip12a extends JavaPlugin
     public void save(){
         try {
             File file = new File(getDataFolder() + "/names.txt");
+            if(!file.exists()){
+                file.createNewFile();
+            }
             PrintWriter write = new PrintWriter(file, "UTF-8");
 
             for (int i = 0; i < names.size(); i++)
