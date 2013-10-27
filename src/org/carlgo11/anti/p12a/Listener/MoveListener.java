@@ -6,11 +6,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.carlgo11.anti.p12a.antip12a;
 
-public class MoveListener implements Listener
-{
+public class MoveListener implements Listener {
+
     antip12a plugin;
 
-    public MoveListener (antip12a plugin)
+    public MoveListener(antip12a plugin)
     {
         this.plugin = plugin;
     }
@@ -20,10 +20,10 @@ public class MoveListener implements Listener
     {
         Player p = e.getPlayer();
 
-
-        if (!plugin.randomText.contains(p))
-        {
-            e.setCancelled(true);
+        if (plugin.randomText != null) {
+            if (!plugin.randomText.contains(p)) {
+                e.setCancelled(true);
+            }
         }
     }
 }

@@ -15,26 +15,21 @@ public class RandomString {
     {
         String m = r.Difficulty;
 
-        if (m.equalsIgnoreCase("Hard"))
-        {
+        if (m.equalsIgnoreCase("Hard")) {
             diff = hard;
-        }
-        else if (m.equalsIgnoreCase("Normal"))
-        {
+        } else if (m.equalsIgnoreCase("Normal")) {
             diff = normal;
-        }
-        else if (m.equalsIgnoreCase("Easy"))
-        {
+        } else if (m.equalsIgnoreCase("Easy")) {
             diff = easy;
         }
     }
+
     public static void random()
     {
         getDifficulty();
         Random n = new Random();
 
-        for(int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             int num = n.nextInt(diff.length() - 1);
             String s = "" + diff.charAt(num);
             string += s;

@@ -6,8 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-public class CommandListener implements Listener
-{
+public class CommandListener implements Listener {
+
     antip12a plugin;
 
     public CommandListener(antip12a plug)
@@ -16,12 +16,14 @@ public class CommandListener implements Listener
     }
 
     @EventHandler
-    public void onCMD(PlayerCommandPreprocessEvent e) {
+    public void onCMD(PlayerCommandPreprocessEvent e)
+    {
         Player player = e.getPlayer();
 
-        if ((!plugin.randomText.contains(player)) && (!e.getMessage().contains("verify")))
-        {
-            e.setCancelled(true);
+        if (plugin.randomText != null) {
+            if ((!plugin.randomText.contains(player)) && (!e.getMessage().contains("verify"))) {
+                e.setCancelled(true);
+            }
         }
     }
 }
