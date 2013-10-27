@@ -11,7 +11,7 @@ public class RandomString {
     static String diff;
     static antip12a r;
 
-    public static void getDifficulty()
+    static void getDifficulty()
     {
         String m = r.Difficulty;
 
@@ -35,7 +35,7 @@ public class RandomString {
 
         for(int i = 0; i < 10; i++)
         {
-            int num = n.nextInt(diff.length());
+            int num = n.nextInt(diff.length() - 1);
             String s = "" + diff.charAt(num);
             string += s;
         }
