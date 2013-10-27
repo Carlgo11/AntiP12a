@@ -1,5 +1,8 @@
 package org.carlgo11.anti.p12a;
 
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.carlgo11.anti.p12a.Language.Lang;
+import org.carlgo11.anti.p12a.Language.loadlang;
 import org.carlgo11.anti.p12a.Listener.*;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,18 +20,19 @@ public class antip12a extends JavaPlugin
     public String Difficulty;
     ArrayList<String> names;
     public ArrayList<String> randomText;
+    public static YamlConfiguration LANG;
+    public static File LANG_FILE;
 
     @Override
     public void onEnable()
     {
-        this.saveDefaultConfig();
-        this.getConfig().options().copyDefaults(true);
-        this.saveConfig();
+        checkConfig();
+        loadFile();
 
-        prefix = this.getConfig().getString("Prefix");
         Difficulty = this.getConfig().getString("Difficulty");
         pre = ChatColor.GREEN + "[" + prefix + "] ";
 
+        getServer().getPluginManager().registerEvents(new loadlang(this), this);
         getServer().getPluginManager().registerEvents(new JoinListener(this), this);
         getServer().getPluginManager().registerEvents(new ChatListener(this), this);
         getServer().getPluginManager().registerEvents(new MoveListener(this), this);
@@ -39,7 +43,22 @@ public class antip12a extends JavaPlugin
     @Override
     public void onDisable()
     {
+    }
 
+    public void checkConfig() {
+        File config = new File(this.getDataFolder(), "src/org.carlgo11.anti.p12a/config.yml");
+        if (!config.exists()) {
+            this.saveDefaultConfig();
+            System.out.println("[" + getDescription().getName() + "] " + "No config.yml detected, config.yml created.");
+        }
+    }
+
+    public YamlConfiguration getLang() {
+        return LANG;
+    }
+
+    public File getLangFile() {
+        return LANG_FILE;
     }
 
     public void loadFile(){
