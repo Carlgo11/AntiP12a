@@ -147,7 +147,7 @@ public class antip12a extends JavaPlugin
                 {
                     if (args[0].equalsIgnoreCase("verify"))
                     {
-                        if (sender.hasPermission("antip12a.verify.player"))
+                        if (sender.hasPermission("antip12a.verify"))
                         {
                             if (names.contains(args[1]))
                             {
