@@ -10,13 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 import java.util.ArrayList;
 
-/**
- * Bukkit Plugin
- * Plugin Name: antip12a
- * Author: tryy3
- * Date: 2013-10-26
- * Time: 12:19
- */
 public class antip12a extends JavaPlugin
 {
     String prefix;

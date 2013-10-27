@@ -6,13 +6,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.carlgo11.anti.p12a.antip12a;
 
-/**
- * Bukkit Plugin
- * Plugin Name: antip12a
- * Author: tryy3
- * Date: 2013-10-26
- * Time: 13:27
- */
 public class MoveListener implements Listener
 {
     antip12a plugin;

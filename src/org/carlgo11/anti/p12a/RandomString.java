@@ -2,13 +2,6 @@ package org.carlgo11.anti.p12a;
 
 import java.util.Random;
 
-/**
- * Bukkit Plugin
- * Plugin Name: antip12a
- * Author: tryy3
- * Date: 2013-10-26
- * Time: 12:24
- */
 public class RandomString {
 
     public static String string = "";
