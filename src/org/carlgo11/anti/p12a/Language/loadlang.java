@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
-import org.carlgo11.anti.p12a.antip12a;
+import org.carlgo11.anti.p12a.Main;
 
 public class loadlang implements Listener {
 
-    antip12a plugin;
+    Main plugin;
 
-    public loadlang(antip12a plug) {
+    public loadlang(Main plug) {
         super();
         this.plugin = plug;
         this.loadLang();
@@ -48,8 +48,8 @@ public class loadlang implements Listener {
                 }
             }
             Lang.setFile(conf);
-            antip12a.LANG = conf;
-            antip12a.LANG_FILE = lang;
+            Main.LANG = conf;
+            Main.LANG_FILE = lang;
             try {
                 conf.save(plugin.getLangFile());
             } catch (IOException e) {
@@ -85,8 +85,8 @@ public class loadlang implements Listener {
                 }
             }
             Lang.setFile(conf);
-            antip12a.LANG = conf;
-            antip12a.LANG_FILE = lang;
+            Main.LANG = conf;
+            Main.LANG_FILE = lang;
             try {
                 conf.save(plugin.getLangFile());
             } catch (IOException e) {

@@ -9,7 +9,7 @@ public class RandomString {
     static String normal = "0123456789abcdefghijklmnopqrstuvwxyz";
     static String hard = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static String diff;
-    static antip12a r;
+    static Main r;
 
     static void getDifficulty()
     {

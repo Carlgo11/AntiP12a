@@ -5,15 +5,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.carlgo11.anti.p12a.Language.Lang;
+import org.carlgo11.anti.p12a.Main;
 import org.carlgo11.anti.p12a.RandomString;
-import org.carlgo11.anti.p12a.antip12a;
 
 import java.util.ArrayList;
 
 public class JoinListener implements Listener {
-    antip12a plugin;
+    Main plugin;
 
-    public JoinListener (antip12a plugin)
+    public JoinListener (Main plugin)
     {
         this.plugin = plugin;
     }
@@ -30,8 +31,7 @@ public class JoinListener implements Listener {
             plugin.randomText.add(p + " " + rand);
             plugin.save();
 
-            p.sendMessage(plugin.pre + ChatColor.RED +
-                    "Welcome to the server Sir! To see that you know how to play on a server we want you to type this command in the chat: " +
+            p.sendMessage(Lang.prefix.toString() + Lang.welcome.toString() +
                     ChatColor.AQUA + "/verify " + rand + ".");
         }
 

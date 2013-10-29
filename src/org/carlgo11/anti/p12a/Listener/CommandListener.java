@@ -1,6 +1,6 @@
 package org.carlgo11.anti.p12a.Listener;
 
-import org.carlgo11.anti.p12a.antip12a;
+import org.carlgo11.anti.p12a.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,9 +8,9 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class CommandListener implements Listener
 {
-    antip12a plugin;
+    Main plugin;
 
-    public CommandListener(antip12a plug)
+    public CommandListener(Main plug)
     {
         this.plugin = plug;
     }

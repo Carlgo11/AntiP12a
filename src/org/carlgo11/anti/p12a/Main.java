@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.carlgo11.anti.p12a.Language.Lang;
 import org.carlgo11.anti.p12a.Language.loadlang;
 import org.carlgo11.anti.p12a.Listener.BlockListener;
 import org.carlgo11.anti.p12a.Listener.ChatListener;
@@ -16,7 +17,7 @@ import org.carlgo11.anti.p12a.Listener.MoveListener;
 import java.io.*;
 import java.util.ArrayList;
 
-public class antip12a extends JavaPlugin
+public class Main extends JavaPlugin
 {
     String prefix;
     public String pre;
@@ -33,7 +34,6 @@ public class antip12a extends JavaPlugin
         loadFile();
 
         Difficulty = this.getConfig().getString("Difficulty");
-        pre = ChatColor.GREEN + "[" + prefix + "] ";
 
         getServer().getPluginManager().registerEvents(new loadlang(this), this);
         getServer().getPluginManager().registerEvents(new JoinListener(this), this);
@@ -49,7 +49,7 @@ public class antip12a extends JavaPlugin
     }
 
     public void checkConfig() {
-        File config = new File(this.getDataFolder(), "src/org.carlgo11.anti.p12a/config.yml");
+        File config = new File(this.getDataFolder(), "config.yml");
         if (!config.exists()) {
             this.saveDefaultConfig();
             System.out.println("[" + getDescription().getName() + "] " + "No config.yml detected, config.yml created.");
@@ -102,12 +102,12 @@ public class antip12a extends JavaPlugin
     }
 
     public void helpMessage(CommandSender p){
-        p.sendMessage(ChatColor.GREEN + "======== " + ChatColor.YELLOW + pre + ChatColor.GREEN + " ======== ");
-        p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a" + ChatColor.YELLOW + " Shows all the commands");
-        p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a help" + ChatColor.YELLOW + " Shows all the commands");
-        p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a reload" + ChatColor.YELLOW + " Reload the config.yml");
-        p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a verify <player>" + ChatColor.YELLOW + " Manully verify a player");
-        p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a check <player>" + ChatColor.YELLOW + " check if a player has verifyed");
+        p.sendMessage(ChatColor.GREEN + "======== " + Lang.prefix.toString() + ChatColor.GREEN + " ======== ");
+        p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a " + Lang.antip12a.toString());
+        p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a help " + Lang.antip12a.toString());
+        p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a reload " + Lang.antip12a_reload.toString());
+        p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a verify <player> " + Lang.antip12a_verify.toString());
+        p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a check <player> " + Lang.antip12a_check.toString());
 
     }
 
@@ -116,12 +116,12 @@ public class antip12a extends JavaPlugin
     {
         if (!(sender instanceof Player))
         {
-            sender.sendMessage("This command can only be sent from a player!");
+            sender.sendMessage(Lang.console_error.toString());
             return true;
         }
         else
         {
-            String perm = prefix + ChatColor.RED + " You don't have permission to use that command!";
+            String perm = Lang.prefix.toString() + Lang.permission.toString();
 
             if (command.getName().equalsIgnoreCase("antip12a"))
             {
@@ -169,14 +169,14 @@ public class antip12a extends JavaPlugin
                         {
                             if (names.contains(args[1]))
                             {
-                                sender.sendMessage(pre + ChatColor.RED + " This player is already verified!");
+                                sender.sendMessage(Lang.prefix.toString() + Lang.verify_already.toString());
                                 return true;
                             }
                             else
                             {
                                 names.add(args[1]);
                                 save();
-                                sender.sendMessage(pre + ChatColor.GREEN + args[1] + " is now verified!");
+                                sender.sendMessage(Lang.prefix.toString() + Lang.verify_confirmed.toString().replace("%p", args[1]));
                                 return true;
                             }
                         }
@@ -192,12 +192,12 @@ public class antip12a extends JavaPlugin
                         {
                             if (names.contains(args[1]))
                             {
-                                sender.sendMessage(pre + ChatColor.GREEN + args[1] + " is verified");
+                                sender.sendMessage(Lang.prefix.toString() + Lang.check_verified.toString().replace("%p", args[1]));
                                 return true;
                             }
                             else
                             {
-                                sender.sendMessage(pre + ChatColor.YELLOW + args[1] + " is not verified");
+                                sender.sendMessage(Lang.prefix.toString() + Lang.check_no_verified.toString().replace("%p", args[1]));
                                 return true;
                             }
                         }
@@ -218,7 +218,7 @@ public class antip12a extends JavaPlugin
             {
                 if(args.length != 1)
                 {
-                    sender.sendMessage(pre + ChatColor.YELLOW + "Think you messed something up! Try again");
+                    sender.sendMessage(Lang.prefix.toString() + Lang.verify_derp.toString());
                     return true;
                 }
                 else
@@ -234,18 +234,18 @@ public class antip12a extends JavaPlugin
                             names.add(sender.toString());
                             save();
 
-                            sender.sendMessage(pre + "Okay! Go ahead!");
+                            sender.sendMessage(Lang.prefix.toString() + Lang.nop12a.toString());
                             return true;
                         }
                         else
                         {
-                            sender.sendMessage(prefix + ChatColor.YELLOW + "Think you messed something up! Try again");
+                            sender.sendMessage(Lang.prefix.toString() + Lang.verify_derp.toString());
                             return true;
                         }
                     }
                     else
                     {
-                        sender.sendMessage(pre + ChatColor.YELLOW + "Think you messed something up! Try again");
+                        sender.sendMessage(Lang.prefix.toString() + Lang.verify_derp.toString());
                         return true;
                     }
                 }
