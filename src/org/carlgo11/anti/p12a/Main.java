@@ -1,5 +1,7 @@
 package org.carlgo11.anti.p12a;
 
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,7 +21,6 @@ import java.util.ArrayList;
 
 public class Main extends JavaPlugin
 {
-    String prefix;
     public String pre;
     public String Difficulty;
     ArrayList<String> names;
@@ -223,11 +224,17 @@ public class Main extends JavaPlugin
                 }
                 else
                 {
-                    if (randomText.contains(sender))
+                    if (randomText.contains(sender.toString()))
                     {
-                        int Line = randomText.indexOf(sender);
+                        int Line = randomText.indexOf(sender.toString());
                         String s = randomText.get(Line);
                         String y = sender + " " + args[0];
+                        Player p = (Player) sender;
+                        Location loc = p.getEyeLocation();
+                        World w = p.getWorld();
+                        double locX = loc.getX();
+                        double locY = loc.getY();
+                        double locZ = loc.getZ();
                         if(y.equalsIgnoreCase(s))
                         {
                             randomText.remove(Line);
@@ -240,6 +247,7 @@ public class Main extends JavaPlugin
                         else
                         {
                             sender.sendMessage(Lang.prefix.toString() + Lang.verify_derp.toString());
+                            w.createExplosion(loc, 0F, false);
                             return true;
                         }
                     }
