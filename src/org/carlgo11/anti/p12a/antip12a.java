@@ -10,8 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 import java.util.ArrayList;
 
-public class antip12a extends JavaPlugin {
-
+public class antip12a extends JavaPlugin
+{
     String prefix;
     public String pre;
     public String Difficulty;
@@ -42,43 +42,44 @@ public class antip12a extends JavaPlugin {
 
     }
 
-    public void loadFile()
-    {
-        try {
+    public void loadFile(){
+        try
+        {
             File file = new File(getDataFolder() + "/names.txt");
             file.createNewFile();
             BufferedReader read = new BufferedReader(new FileReader(file));
             String line;
             while ((line = read.readLine()) != null) {
-                if (!names.contains(line.toString())) {
+                if  (!names.contains(line.toString())){
                     names.add(line.toString());
                 }
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void saveNames()
-    {
+    public void save(){
         try {
             File file = new File(getDataFolder() + "/names.txt");
-            if (!file.exists()) {
+            if(!file.exists()){
                 file.createNewFile();
             }
             PrintWriter write = new PrintWriter(file, "UTF-8");
 
-            for (int i = 0; i < names.size(); i++) {
+            for (int i = 0; i < names.size(); i++)
+            {
                 write.println(names.get(i));
             }
             write.close();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void helpMessage(CommandSender p)
-    {
+    public void helpMessage(CommandSender p){
         p.sendMessage(ChatColor.GREEN + "======== " + ChatColor.YELLOW + pre + ChatColor.GREEN + " ======== ");
         p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a" + ChatColor.YELLOW + " Shows all the commands");
         p.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a help" + ChatColor.YELLOW + " Shows all the commands");
@@ -91,91 +92,137 @@ public class antip12a extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player))
+        {
             sender.sendMessage("This command can only be sent from a player!");
             return true;
-        } else {
+        }
+        else
+        {
             String perm = prefix + ChatColor.RED + " You don't have permission to use that command!";
 
-            if (command.getName().equalsIgnoreCase("antip12a")) {
-                if (args.length == 0) {
-                    if (sender.hasPermission("antip12a.help")) {
+            if (command.getName().equalsIgnoreCase("antip12a"))
+            {
+                if (args.length == 0)
+                {
+                    if (sender.hasPermission("antip12a.help"))
+                    {
                         helpMessage(sender);
                         return true;
-                    } else {
+                    }
+                    else
+                    {
                         sender.sendMessage(perm);
                         return true;
                     }
-                } else if (args.length == 1) {
-                    if (args[0].equalsIgnoreCase("verify")) {
-                        helpMessage(sender);
-                        return true;
-                    } else if (args[0].equalsIgnoreCase("check")) {
-                        sender.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a check" + ChatColor.RED + " <player>");
-                        return true;
-                    } else if (args[0].equalsIgnoreCase("help")) {
-                        helpMessage(sender);
-                        return true;
-                    } else {
+                }
+                else if (args.length == 1)
+                {
+                    if (args[0].equalsIgnoreCase("verify"))
+                    {
                         helpMessage(sender);
                         return true;
                     }
-                } else if (args.length == 2) {
-                    if (args[0].equalsIgnoreCase("verify")) {
-                        if (sender.hasPermission("antip12a.verify")) {
-                            if (names.contains(args[1])) {
+                    else if (args[0].equalsIgnoreCase("check"))
+                    {
+                        sender.sendMessage(ChatColor.GRAY + "-  /" + ChatColor.RED + "Antip12a check" + ChatColor.RED + " <player>");
+                        return true;
+                    }
+                    else if (args[0].equalsIgnoreCase("help"))
+                    {
+                        helpMessage(sender);
+                        return true;
+                    }
+                    else
+                    {
+                        helpMessage(sender);
+                        return true;
+                    }
+                }
+                else if (args.length == 2)
+                {
+                    if (args[0].equalsIgnoreCase("verify"))
+                    {
+                        if (sender.hasPermission("antip12a.verify"))
+                        {
+                            if (names.contains(args[1]))
+                            {
                                 sender.sendMessage(pre + ChatColor.RED + " This player is already verified!");
                                 return true;
-                            } else {
+                            }
+                            else
+                            {
                                 names.add(args[1]);
-                                saveNames();
+                                save();
                                 sender.sendMessage(pre + ChatColor.GREEN + args[1] + " is now verified!");
                                 return true;
                             }
-                        } else {
-                            sender.sendMessage(perm);
-                            return true;
                         }
-                    } else if (args[0].equalsIgnoreCase("check")) {
-                        if (sender.hasPermission("antip12a.check")) {
-                            if (names.contains(args[1])) {
-                                sender.sendMessage(pre + ChatColor.GREEN + args[1] + " is verified");
-                                return true;
-                            } else {
-                                sender.sendMessage(pre + ChatColor.YELLOW + args[1] + " is not verified");
-                                return true;
-                            }
-                        } else {
+                        else
+                        {
                             sender.sendMessage(perm);
                             return true;
                         }
                     }
-                } else {
+                    else if (args[0].equalsIgnoreCase("check"))
+                    {
+                        if (sender.hasPermission("antip12a.check"))
+                        {
+                            if (names.contains(args[1]))
+                            {
+                                sender.sendMessage(pre + ChatColor.GREEN + args[1] + " is verified");
+                                return true;
+                            }
+                            else
+                            {
+                                sender.sendMessage(pre + ChatColor.YELLOW + args[1] + " is not verified");
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            sender.sendMessage(perm);
+                            return true;
+                        }
+                    }
+                }
+                else
+                {
                     helpMessage(sender);
                     return true;
                 }
             }
-            if (command.getName().equalsIgnoreCase("verify")) {
-                if (args.length != 1) {
+            if (command.getName().equalsIgnoreCase("verify"))
+            {
+                if(args.length != 1)
+                {
                     sender.sendMessage(pre + ChatColor.YELLOW + "Think you messed something up! Try again");
                     return true;
-                } else {
-                    if (randomText.contains(sender)) {
+                }
+                else
+                {
+                    if (randomText.contains(sender))
+                    {
                         int Line = randomText.indexOf(sender);
                         String s = randomText.get(Line);
                         String y = sender + " " + args[0];
-                        if (y.equalsIgnoreCase(s)) {
+                        if(y.equalsIgnoreCase(s))
+                        {
                             randomText.remove(Line);
                             names.add(sender.toString());
-                            saveNames();
+                            save();
 
                             sender.sendMessage(pre + "Okay! Go ahead!");
                             return true;
-                        } else {
+                        }
+                        else
+                        {
                             sender.sendMessage(prefix + ChatColor.YELLOW + "Think you messed something up! Try again");
                             return true;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         sender.sendMessage(pre + ChatColor.YELLOW + "Think you messed something up! Try again");
                         return true;
                     }

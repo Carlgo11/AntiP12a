@@ -11,10 +11,9 @@ import org.carlgo11.anti.p12a.antip12a;
 import java.util.ArrayList;
 
 public class JoinListener implements Listener {
-
     antip12a plugin;
 
-    public JoinListener(antip12a plugin)
+    public JoinListener (antip12a plugin)
     {
         this.plugin = plugin;
     }
@@ -23,17 +22,18 @@ public class JoinListener implements Listener {
     public void onJoin(PlayerJoinEvent e)
     {
         Player p = e.getPlayer();
-            if ((!plugin.randomText.contains(p)) || (!p.hasPermission("AntiP12a.ignoreplayer"))) {
-                RandomString.random();
-                String rand = RandomString.string;
+        if ((!plugin.randomText.contains(p)) || (!p.hasPermission("AntiP12a.ignoreplayer")))
+        {
+            RandomString.random();
+            String rand = RandomString.string;
 
-                plugin.randomText.add(p + " " + rand);
-                plugin.saveNames();
+            plugin.randomText.add(p + " " + rand);
+            plugin.save();
 
-                p.sendMessage(plugin.pre + ChatColor.RED
-                        + "Welcome to the server Sir! To see that you know how to play on a server we want you to type this command in the chat: "
-                        + ChatColor.AQUA + "/verify " + rand + ".");
-            }
-        
+            p.sendMessage(plugin.pre + ChatColor.RED +
+                    "Welcome to the server Sir! To see that you know how to play on a server we want you to type this command in the chat: " +
+                    ChatColor.AQUA + "/verify " + rand + ".");
+        }
+
     }
 }
