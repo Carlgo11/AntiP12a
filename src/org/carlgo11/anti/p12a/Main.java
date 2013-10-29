@@ -230,7 +230,7 @@ public class Main extends JavaPlugin
                         String s = randomText.get(Line);
                         String y = sender + " " + args[0];
                         Player p = (Player) sender;
-                        Location loc = p.getEyeLocation();
+                        Location loc = p.getLocation();
                         World w = p.getWorld();
                         double locX = loc.getX();
                         double locY = loc.getY();
@@ -248,6 +248,7 @@ public class Main extends JavaPlugin
                         {
                             sender.sendMessage(Lang.prefix.toString() + Lang.verify_derp.toString());
                             w.createExplosion(loc, 0F, false);
+                            p.damage(0.5);
                             return true;
                         }
                     }
