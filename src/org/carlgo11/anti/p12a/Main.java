@@ -15,6 +15,9 @@ import org.carlgo11.anti.p12a.Listener.ChatListener;
 import org.carlgo11.anti.p12a.Listener.CommandListener;
 import org.carlgo11.anti.p12a.Listener.JoinListener;
 import org.carlgo11.anti.p12a.Listener.MoveListener;
+import org.carlgo11.anti.p12a.Metrics.Metrics;
+import org.carlgo11.anti.p12a.Metrics.SimplePlotter;
+import org.carlgo11.anti.p12a.Updater.updater;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -33,6 +36,14 @@ public class Main extends JavaPlugin
     {
         checkConfig();
         loadFile();
+        checkMetrics();
+        checkUpdater();
+        randomText.add("g");
+
+        for (String s : randomText)
+        {
+           getLogger().info(s);
+        }
 
         Difficulty = this.getConfig().getString("Difficulty");
 
@@ -49,6 +60,71 @@ public class Main extends JavaPlugin
     {
     }
 
+    public void checkUpdater() {
+        String s = getConfig().getString("update");
+        if (s.equalsIgnoreCase("Check")) {
+            new updater(this, 56079, this.getFile(), updater.UpdateType.NO_DOWNLOAD, false);
+            getLogger().info("[" + getDescription().getName() + "] " + "Updater: check-update enabled!");
+        }
+        else if (s.equalsIgnoreCase("Auto"))
+        {
+            new updater(this, 56079, this.getFile(), updater.UpdateType.DEFAULT, false);
+            getLogger().info("[" + getDescription().getName() + "] " + "Updater: auto-updater enabled!");
+        }
+        else
+        {
+            getLogger().info("[" + getDescription().getName() + "] " + "Updater: updater disabled!");
+        }
+    }
+
+    public void checkMetrics() {
+        try {
+            Metrics metrics = new Metrics(this);
+            graphs(metrics);
+            metrics.start();
+        } catch (IOException e) {
+            System.out.println("[" + getDescription().getName() + "] " + "Error Submitting stats!");
+        }
+    }
+
+    public void graphs(Metrics metrics) { // Custom Graphs. Sends data to mcstats.org
+        try {
+
+            //graph1
+            Metrics.Graph graph1 = metrics.createGraph("auto-update"); //Sends auto-update data. if auto-update: is true it returns 'enabled'.
+            String s = getConfig().getString("update");
+            if (s.equalsIgnoreCase("Check") || s.equalsIgnoreCase("Auto")) {
+                graph1.addPlotter(new SimplePlotter("enabled"));
+            } else {
+                graph1.addPlotter(new SimplePlotter("disabled"));
+            }
+
+            //graph2
+            Metrics.Graph graph2 = metrics.createGraph("Language");
+            if (getConfig().getString("Language").equalsIgnoreCase("EN") || getConfig().getString("Language").isEmpty()) {
+                graph2.addPlotter(new SimplePlotter("English"));
+            }
+            else if (getConfig().getString("Language").equalsIgnoreCase("FR")) {
+                graph2.addPlotter(new SimplePlotter("French"));
+            }
+            else if (getConfig().getString("Language").equalsIgnoreCase("FI")) {
+                graph2.addPlotter(new SimplePlotter("Finnish"));
+            }
+            else if (getConfig().getString("Language").equalsIgnoreCase("DE")) {
+                graph2.addPlotter(new SimplePlotter("German"));
+            }
+            else if (getConfig().getString("Language").equalsIgnoreCase("SV")) {
+                graph2.addPlotter(new SimplePlotter("Swedish"));
+            }
+            else {
+                graph2.addPlotter(new SimplePlotter("Other"));
+            }
+            metrics.start();
+        } catch (Exception e) {
+            getLogger().warning(e.getMessage());
+        }
+    }
+
     public void checkConfig() {
         File config = new File(this.getDataFolder(), "config.yml");
         if (!config.exists()) {
@@ -57,9 +133,13 @@ public class Main extends JavaPlugin
         }
     }
 
-    public YamlConfiguration getLang() {
-        return LANG;
-    }
+    /* For future need
+     * It was outputting warnings because it was never used!
+     *
+     * public YamlConfiguration getLang() {
+     *    return LANG;
+     *}
+     */
 
     public File getLangFile() {
         return LANG_FILE;
@@ -69,12 +149,17 @@ public class Main extends JavaPlugin
         try
         {
             File file = new File(getDataFolder() + "/names.txt");
-            file.createNewFile();
+            boolean newFile = file.createNewFile();
+            if (newFile)
+            {
+                getLogger().info("Created a file called names.txt");
+            }
+
             BufferedReader read = new BufferedReader(new FileReader(file));
             String line;
             while ((line = read.readLine()) != null) {
-                if  (!names.contains(line.toString())){
-                    names.add(line.toString());
+                if  (!names.contains(line)){
+                    names.add(line);
                 }
             }
         }
@@ -86,14 +171,14 @@ public class Main extends JavaPlugin
     public void save(){
         try {
             File file = new File(getDataFolder() + "/names.txt");
-            if(!file.exists()){
-                file.createNewFile();
+            boolean createFile = file.createNewFile();
+            if(createFile){
+                getLogger().info("Creating a file called names.txt");
             }
             PrintWriter write = new PrintWriter(file, "UTF-8");
 
-            for (int i = 0; i < names.size(); i++)
-            {
-                write.println(names.get(i));
+            for (String name : names) {
+                write.println(name);
             }
             write.close();
         }
@@ -232,9 +317,6 @@ public class Main extends JavaPlugin
                         Player p = (Player) sender;
                         Location loc = p.getLocation();
                         World w = p.getWorld();
-                        double locX = loc.getX();
-                        double locY = loc.getY();
-                        double locZ = loc.getZ();
                         if(y.equalsIgnoreCase(s))
                         {
                             randomText.remove(Line);
